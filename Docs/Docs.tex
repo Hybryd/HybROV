@@ -1,0 +1,288 @@
+\documentclass[11pt,a4paper]{article}
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = pdflatex
+%!TEX spellcheck = English
+\usepackage{etex}
+\usepackage[utf8]{inputenc}
+\usepackage[TS1,T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[a4paper,tmargin=3cm,bmargin=3cm,rmargin=2.2cm,lmargin=2.2cm]{geometry}
+\usepackage{lmodern}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+
+\usepackage{amsfonts,amssymb,amsmath,mathtools,cite,slashed,cases}
+\usepackage[amsthm,thmmarks,amsmath]{ntheorem}
+% \usepackage{slashed}
+%\usepackage{amsfonts,amssymb,amsmath,amsthm,cite,mathtools,cases}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+ \newcommand{\PAYE}{{\Large\color{orange}\checkmark}}
+ \newcommand{\RECU}{{\Large\color{green}\checkmark}}
+
+
+%%%%%%%%%%%%
+% DOCUMENT %
+%%%%%%%%%%%%
+
+\begin{document}
+%   \section{Stabilisateur subaquatique pour caméra}
+%   
+%     Idée: 
+%     avoir un système de stabilisation pour caméra permettant de filmer correctement sous l'eau. Un accéléromètre permet de détecter les mouvements de la caméra compensés par deux moteurs perpendiculaires (un pour l'axe vertical, l'autre pour la rotation). Une bouée permet à l'ensemble d'avoir une orientation verticale permanente. \\
+%     
+%     Pièces:
+%     \begin{itemize}
+%       \item[\checkmark] 1 Accéléromètre
+%       \item[\checkmark] 2 moteurs et leur controlleur (fan 12V de PC + LM317t)
+%       \item batterie
+%       \item[\checkmark] 1 interrupteur on/off
+%       \item[\checkmark] 1 pushbutton pour mettre à jour la position à garder
+%       \item arduino      
+%     \end{itemize}
+%     
+%     À faire:
+%     \begin{itemize}
+%       \item Dessiner le système
+%       \item Tester si l'ensemble va sous l'eau
+%       \item Faire le code arduino
+%     \end{itemize}
+%     
+%     Code arduino: à l'allumage, stocker les données de l'accéléromètre comme référence, puis détecter les variations et actionner les moteurs en conséquence. Lorsque le pushbutton est activé, mettre à jour la référence.
+
+
+  
+  
+  \section{Drone subaquatique avec caméra}
+    Liens:
+    \begin{itemize}
+      \item \href{http://www.instructables.com/id/Underwater-ROV/?ALLSTEPS}{Instructable}
+      \item \href{http://www.homebuiltrovs.com}{Homebuiltrovs}
+      \item \href{http://www.interspec.org/}{Interspec}
+      \item \href{http://www.rc-submarines.net/}{rc-submarines}
+      \item \href{http://www.mcmaster.com}{matériaux}
+      \item \href{http://www.diyrov.net/}{diyrov}
+      \item \href{http://stephane.lavirotte.com/perso/rov/esc_brushless_raspberry.html}{lien}: TUTO lier moteurs, esc et RPIé
+    \end{itemize}
+ 
+
+    
+    
+    
+    \subsection{Pièces}
+    
+      \subsubsection{Propulsion}
+%         {\bf Solution 1}\\
+%         Source \url{http://www.homebuiltrovs.com/rovforum/viewtopic.php?f=3&t=1190} : 
+%         \begin{itemize}
+%           \item \href{http://hobbyking.com/hobbyking/store/__16229__NTM_Prop_Drive_Series_28_30A_750kv_140w.html}{DC motor} brushless :\\ 
+%           
+%             \begin{tabular}{ll}
+%               Model & NTM Prop Drive Series 28-30A 750kv\\
+%               Kv & 750rpm/v\\
+%               Max current & 20A\\
+%               Max Power &  120W @ 12v (3S) / 140W @ 15v (4S)\\
+%               Shaft & 3mm \\
+%               Weight & 67.1g\\
+%               ESC & 25A\\
+%               Cell count & 3s~4s Lipoly\\
+%               Bolt holes & 16mm \& 19mm\\
+%               Bolt thread&  M3\\
+%               Connection & 3.5mm Bullet-connector\\
+% %               Suggested Prop & Prop test data coming soon!
+% %               Prix: $4\times13.49= 53.96$ €
+%               Price & {\color{red} 13.49 €}
+%             \end{tabular}\\
+%           
+%           \item \href{http://hobbyking.com/hobbyking/store/__15205__Hobby_King_30A_ESC_3A_UBEC.html}{ESC}:\\
+%           \begin{tabular}{ll}
+%             Constant Current&  30A\\
+%             Burst Current & 40A\\
+%             Battery & 2-4S Lipoly / 5-12s NiXX\\
+%             BEC & 5v / 3A\\
+%             Motor Type & Sensorless Brushless\\
+%             Size & 54 x 26 11mm\\
+%             Weight & 32g \\
+%             Price & {\color{red} 8.99 €}
+%           \end{tabular}\\
+%           Programming Functions:\\
+%           \begin{tabular}{ll}
+%             Battery Type & Lipo /NiXX\\
+%             Brake & On / Off \\
+%             Voltage Protection & Low / Mid / High\\
+%             Protection mode & Reduce power / Cut off power \\
+%             Timing & Auto / High / Low\\
+%             Startup & Fast / Normal / Soft\\
+%             PWM Frequency & 8k / 16k \\
+%             Helicopter mode & Off / 5sec / 15sec (Start up delay)\\
+%           \end{tabular}
+% 
+%           
+%           \item \href{http://hobbyking.com/hobbyking/store/__7356__Turnigy_4mm_AquaProp_43x26x9mm_.html}{Propeller} :\\
+% 
+%           \begin{tabular}{ll}
+%             Model & Turnigy 4mm AquaProp\\
+%             Size & 43x26x9mm \\
+%             Length &   43mm\\
+%             Pitch &  26\\
+%             Diameter & 9mm \\
+%             Shaft Size & 4mm\\
+%             Price & {\color{red} 1.31 €}
+%           \end{tabular}
+%           
+% 
+%           \item \href{http://hobbyking.com/hobbyking/store/__12716__5mm_Drive_dog.html}{Dog dive}. Price {\color{red} $1.58$} €.
+% 
+%           \item \href{http://hobbyking.com/hobbyking/store/__16719__NTM_Prop_Drive_28_Series_Accessory_Pack.html}{Fixations}. Price {\color{red} $1.70$} €
+% 
+%         \end{itemize}
+%         
+%         Sous-total : $4\times 27.07 =$ {\color{red}$108.28$ €}
+%         
+%         
+%         {\bf Solution 2}\\
+        
+        \begin{itemize}
+          \item 4 \href{http://www.aliexpress.com/item/1100GPH-High-Flow-Submersible-Marine-Boat-Electric-Bilge-Pump-12V-3A-FREE-SHIPPING-DHL-EMS-gib/32302138453.html}{Pompes}. \PAYE\\
+                    \begin{tabular}{ll}
+                      Voltage & 12V \\
+                      Current & 3 Amp \\
+                      Flow rate & 1100GPH \\
+                      Height & Approx. 10.5cm\\
+                      Diameter & Approx. 5.5cm\\
+                      Weight & $\sim$ 300g? \\
+                      Price & {\color{red}13.21 €}
+                    \end{tabular}
+          
+          \item 4 \href{http://hobbyking.com/hobbyking/store/__12716__5mm_Drive_dog.html}{Dog dive}. Price {\color{red} $1.58$} €.
+          
+          \item 2 Dual H-bridge (30g Taille: 43 * 43 * 27mm) \PAYE \RECU
+          
+        \end{itemize}
+        Sous total {\color{red}$59.14$ €} 
+
+        
+
+        
+        
+      \subsubsection{Lumière \PAYE}
+        Référénce: une petite torche sous marine fait 300-600 lumens. 
+        \begin{itemize}
+          \item 2 \href{http://www.miniinthebox.com/fr/mr11-4-5w-15x5730smd-310-320lm-2800-3000k-chaud-ampoule-led-a-lumiere-blanche-spot-12-24v_p960936.html?pos=ultimately_buy_6}{ampoules} à DEL (Mass=?, 35 x 35 x 35 mm) à 4.5 W: $2\times 310 = 620$ lumens. Prix $2\times 2 =$ {\color{red}$4$ €}.
+          \item 1 Dual H-bridge (30g Taille: 43 * 43 * 27mm) \PAYE \RECU
+        \end{itemize}
+
+        
+        
+        
+        
+      \subsubsection{Structure}
+        \begin{itemize}
+          \item 1 tube central 160mm
+          \item 2 tubes 
+        \end{itemize}
+
+      
+      \subsubsection{Télécommande  \PAYE}
+        Télécommande reliée par fils, submersible, composée de 2 joysticks : 1 pour le plan horizontal, 1 pour l'axe vertical. Éventuellement un contrôle on/off global et un autre pour l'éclairage.\\
+        \begin{itemize}
+          \item 2 \href{http://www.ebay.co.uk/itm/Analogue-Joystick-Controller-5V-With-Click-Button-Arduino-PI-Compatible-/191608236635?}{Joysticks} Prix : {\color{red} 4.20 €} \PAYE
+          \item câble ethernet \RECU
+        \end{itemize}
+
+
+        BONUS: Activation de la prise de photo/vidéo par servos. 2 \href{http://www.miniinthebox.com/fr/mini-servo-9g-avec-accessoires-bleu-translucide_p638990.html?litb_from=sysmail}{servos} et leurs fixations. Prix $2\times 2.59=$ {\color{red}$5.18$ €} \PAYE.
+      
+      \subsubsection{Électronique  \PAYE}
+        \begin{itemize}
+          \item \href{http://www.amazon.fr/LM2596-Abaisseur-Régulateur-Tension-Ajustable/dp/B00GSY3UBS/ref=pd_cp_147_1?ie=UTF8&refRID=19H2WCT90TTWCF32P1HK}{Régulateur} tension (Mass=?, 48 x 23 x 14 mm). Prix : {\color{red} 1.80 €}.
+          \item \href{http://www.miniinthebox.com/fr/mega-2560-conseil-du-developpement-r3-conseil-atmega2560-16au-pour-arduino_p903300.html}{Arduino Mega 2560 R3}. \\
+          \begin{tabular}{ll}
+            
+          
+            Length & 101.98mm \\
+            Width & 53.63mm \\
+            Height & 15.29mm \\
+            Weight & 34.9g\\
+            Price: {\color{red}$9.99$ €}.
+          \end{tabular}
+          
+          
+          
+          \item 2 \href{http://www.ebay.fr/itm/2-modules-detection-pluie-eau-Water-Sensor-pour-Arduino-envoi-de-France-E137-/201370405351?pt=LH_DefaultDomain_71&hash=item2ee29c89e7}{Capteurs} niveau d'eau (4.7g, 20 x 40 mm). Prix {\color{red} 3,69 €} \PAYE.
+        \end{itemize}
+        Test du cable ethernet : 5m OK.
+
+        
+      
+      \subsubsection{Batterie \PAYE}
+        12V, plus de 3 Ah
+        \begin{itemize}
+          \item \href{http://www.amazon.fr/gp/product/B001CNZP6S?psc=1&redirect=true&ref_=od_aui_detailpages00}{Chargeur} 3, 6, 12V,  3,4 KG. Prix: {\color{red} 16,25 €}.
+          \item \href{http://www.amazon.fr/Batterie-plomb-AGM-12V-12Ah-12Ah/dp/B008FZ0WEG}{Batterie} plomb étanche AGM, $151 \times 98 \times 95$ mm, 12V 12Ah. Prix: {\color{red} 18,90 €}.
+        \end{itemize}
+        %\underline{ATTENTION}: dégage de l'hydrogène: isoler du reste des composants électroniques!
+        
+    \subsection{Calcul volume total d'air requis}
+      Il s'agit d'avoir une idée de la taille globale du ROV. On le modélise par un cylindre en PVC fermé avec deux bouchons en PVC.
+      Masse des composants (g):\\
+      
+      \begin{tabular}{ll}
+        Batterie & 3400\\
+        Moteurs & $\sim 4\times 300= 1200 $\\
+        Arduino & 34.9\\
+        Dual H-bridge & $3\times 30 =90$\\
+        Capteur niveau d'eau & 4.7\\
+        Régulateur tension & $\sim 15$\\
+        Ampoules & $~2 \times 30=60$\\
+        Connectique & $\sim 50$\\
+      \end{tabular}\\
+      
+      {\bf Total : $m_C = 4855$ g}\\
+      
+      Masse volumique PVC: 1380g/L\\
+      Soit un cylindre bouché (CB) en PVC de longueur $\ell$, épaisseur $e$, diamètre interne $D$, bouché par 2 bouchons qui sont des cylindres de diamètre $D+2e$ et hauteur $b$. Masse de l'ensemble:
+      \begin{align*}
+        m_{CB} + m_C= \rho_{PVC} \pi \big( \ell(e^2 + De) + 2b(\tfrac{D+2e}{2})^2\big) + m_C\,.
+      \end{align*}
+      Masse volumique de l'ensemble cylindre+2 bouchons+ composants
+      \begin{align}
+          \rho_{CB+Comp} = \tfrac{m_{CB}+m_C}{vol_{CB}} = \tfrac{\rho_{PVC} \pi \big( \ell(e^2 + De) + 2b(\tfrac{D+2e}{2})^2\big) + m_C}{\pi(\tfrac{D+2e}{2})^2(\ell+2b)}%\rho_{PVC} \tfrac{ L(e^2 + De) + 2b(\tfrac{D+2e}{2})^2}{(\tfrac{D+2e}{2})^2(L+2b)}%\tfrac{\rho_{PVC} \big( L(e^2 + 2De) + 2b(D+2e)^2\big)}{(L+2b)(D+2e)^2}\,.
+      \end{align}
+      Il faut que $\rho_{CB+Comp} = 1025 =: \rho_{ES}$ g/L (eau de mer selon wikipedia). Soit
+      \begin{align}
+        \ell = \tfrac{2b(\tfrac{D}{2}+e)^2(\rho_{PVC}-\rho_{ES}) + \tfrac{m_C}{\pi}}{\rho_{ES}(\tfrac{D}{2}+e)^2-\rho_{PVC}(De+e^2)}
+        %\big(\rho_{ES} - \rho_{PVC}\tfrac{e^2+De}{ (\tfrac{D+2e}{2})^2.10^{-6}} \big)^{-1} \Big( \tfrac{\rho_{PVC} \pi 2b (\tfrac{D+2e}{2})^2.10^{-6} +m_C}{\pi (\tfrac{D+2e}{2})^2 . 10^{-6}} -2b\rho_{ES} \Big)%\big( 2b(\rho_{PVC} - \rho_{ES}) + \tfrac{m_C}{(D+2e)^2}\big)
+      \end{align}
+      
+%      (1025 - 1380 * (5^2+5*140)/( ((140+2*5)/2)^2 * 10^{-6}) )^{-1} * ( (1380 * pi * 2* 20* ((140+2*5)/2)^2 *10^{-6} + 4855)/(pi ((140+2*5)/2)^2 * 10^{-6}) -2*20*1025 )
+      
+      
+      \begin{itemize}
+        \item $\rho_{PVC} = 1380 g/L$
+        \item $D=140mm$
+        \item $e=5mm$
+        \item $b=20mm$
+      \end{itemize}
+      $\rightarrow$ Dimensions du ROV: $\sim 341$mm , $\o_{int} = 140$mm: très raisonnable.
+      
+      % (1025 - 1380 (5^2+25*140)/((140+2*5)^2))^{-1} *( 2*20(1380 - 1025) + (4855)/((140+2*5)^2))
+
+      
+      
+
+        
+        
+    
+    
+    \subsection{Remarques}
+      Problème avec le Dual H-bridge: ne relaie pas le signal PMW.
+      
+      
+      
+\end{document}
+
+
+
