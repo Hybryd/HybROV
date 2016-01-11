@@ -28,32 +28,6 @@
 %%%%%%%%%%%%
 
 \begin{document}
-%   \section{Stabilisateur subaquatique pour caméra}
-%   
-%     Idée: 
-%     avoir un système de stabilisation pour caméra permettant de filmer correctement sous l'eau. Un accéléromètre permet de détecter les mouvements de la caméra compensés par deux moteurs perpendiculaires (un pour l'axe vertical, l'autre pour la rotation). Une bouée permet à l'ensemble d'avoir une orientation verticale permanente. \\
-%     
-%     Pièces:
-%     \begin{itemize}
-%       \item[\checkmark] 1 Accéléromètre
-%       \item[\checkmark] 2 moteurs et leur controlleur (fan 12V de PC + LM317t)
-%       \item batterie
-%       \item[\checkmark] 1 interrupteur on/off
-%       \item[\checkmark] 1 pushbutton pour mettre à jour la position à garder
-%       \item arduino      
-%     \end{itemize}
-%     
-%     À faire:
-%     \begin{itemize}
-%       \item Dessiner le système
-%       \item Tester si l'ensemble va sous l'eau
-%       \item Faire le code arduino
-%     \end{itemize}
-%     
-%     Code arduino: à l'allumage, stocker les données de l'accéléromètre comme référence, puis détecter les variations et actionner les moteurs en conséquence. Lorsque le pushbutton est activé, mettre à jour la référence.
-
-
-  
   
   \section{Drone subaquatique avec caméra}
     Liens:
@@ -64,12 +38,10 @@
       \item \href{http://www.rc-submarines.net/}{rc-submarines}
       \item \href{http://www.mcmaster.com}{matériaux}
       \item \href{http://www.diyrov.net/}{diyrov}
-      \item \href{http://stephane.lavirotte.com/perso/rov/esc_brushless_raspberry.html}{lien}: TUTO lier moteurs, esc et RPIé
+      \item \href{http://stephane.lavirotte.com/perso/rov/esc_brushless_raspberry.html}{lien}: TUTO lier moteurs, esc et RPI
+      \item \href{http://explobotique.org/site/}{explobotique}
+      \item \href{http://uzzors2k.4hv.org/?page=rovnokken}{ROVNokken}
     \end{itemize}
- 
-
-    
-    
     
     \subsection{Pièces}
     
@@ -179,8 +151,12 @@
         
         
       \subsubsection{Structure}
+      
+        \href{http://www.sitakiki.fr/modnaval/tuby.htm}{Lien}
+        \href{http://explobotique.free.fr/vidi1/vidi1_detail3.htm}{vidi}
+        \href{http://explobotique.free.fr/ptipi/realisation_hublot.htm}{hublot}
         \begin{itemize}
-          \item 1 tube central 160mm
+          \item 1 \href{http://www.pointp.fr/gros-oeuvre-vrd-tp/tube-pvc-sotrabat-nf-me-gris-diametre-140mm-longueur-4m-eu-ep-A3890917p213S2R2m23}{tube} PVC 1000x140mm. Prix: {\color{red}7.98 €}
           \item 2 tubes 
         \end{itemize}
 
@@ -259,7 +235,7 @@
       
 %      (1025 - 1380 * (5^2+5*140)/( ((140+2*5)/2)^2 * 10^{-6}) )^{-1} * ( (1380 * pi * 2* 20* ((140+2*5)/2)^2 *10^{-6} + 4855)/(pi ((140+2*5)/2)^2 * 10^{-6}) -2*20*1025 )
       
-      
+      Application :
       \begin{itemize}
         \item $\rho_{PVC} = 1380 g/L$
         \item $D=140mm$
@@ -277,8 +253,8 @@
         
     
     
-    \subsection{Remarques}
-      Problème avec le Dual H-bridge: ne relaie pas le signal PMW.
+%     \subsection{Remarques}
+%       Problème avec le Dual H-bridge: ne relaie pas le signal PMW.
       
       
       
