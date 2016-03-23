@@ -85,10 +85,10 @@ double HR(int X, int Y)
 //////////
 
 // Inputs
-int pinJoyAX         = 9; // analog
-int pinJoyAY         = 8; // analog
-int pinJoyAZ         = 53;
-int pinJoyBX         = 1; // analog
+int pinJoyAX         = A14; // analog
+int pinJoyAY         = A13; // analog
+int pinJoyAZ         = A15;
+int pinJoyBY         = A12; // analog
 int pinWDA           = 51;
 int pinWDB           = 50;
 int pinTensMon       = 0; // analog
@@ -124,7 +124,7 @@ int pinLightREn      = 26;
 int valJoyAX         = 0;
 int valJoyAY         = 0;
 int valJoyAZ         = 0;
-int valJoyBX         = 0;
+int valJoyBY         = 0;
 int valWDA           = 0;
 int valWDB           = 0;
 int valTensMon       = 0;
@@ -137,7 +137,7 @@ int lightState       = 0;
 int valJoyAZPrev     = 0;
 int calJoyAX         = 0;
 int calJoyAY         = 0;
-int calJoyBX         = 0;
+int calJoyBY         = 0;
 
 void setup()
 {
