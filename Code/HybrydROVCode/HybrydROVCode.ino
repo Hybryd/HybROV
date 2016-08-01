@@ -1,39 +1,40 @@
 /*
-Arduino code for the ROV.
+Arduino code for the Hybryd ROV.
+Author: Hybryd
+Date: 01/08/2016
+
+Feel free to reuse/share/improve this code.
+
 
 Parts:
-  DC Motor Z axis Right (MotorZR)
-  DC Motor Z axis Left (MotorZL)
+  DC Motor Vertical axis Right (MotorVR)
+  DC Motor Vertical axis Left (MotorVL)
   DC Motor Horizontal plane Right (MotorHR)
   DC Motor Horizontal plane Left (MotorHL)
   Light Right (LightR)
   Light Left (LightL)
   
 Inputs:
-  Battery level        : int
-  JoystickA X axis     : int
-  JoystickA Y axis     : int
-  JoystickA Z axis     : digital
-  JoystickB Y axis     : int
+  JoystickA X axis     : analogic
+  JoystickA Y axis     : analogic
+  JoystickA Z axis     : analogic (usually digital)
+  JoystickB Y axis     : analogic 
 
 Outputs:
-  Light Right          : int
-  Light Left           : int
-  LED 1 (red)          : digital
-  LED 2 (green)        : digital
-  MotorHR in1          : digital
-  MotorHR in2          : digital
-  MotorHR enable       : PWM
-  MotorHL in1          : digital
-  MotorHL in2          : digital
-  MotorHL enable       : PWM
-  MotorZR in1          : digital
-  MotorZR in2          : digital
-  MotorZR enable       : PWM
-  MotorZL in1          : digital
-  MotorZL in2          : digital
-  MotorZL enable       : PWM  
-  
+  Light Right          : digital
+  Light Left           : digital
+  MotorHR in1          : PWM
+  MotorHR in2          : PWM
+  MotorHR enable       : PWM (usually digital)
+  MotorHL in1          : PWM
+  MotorHL in2          : PWM
+  MotorHL enable       : PWM (usually digital)
+  MotorVR in1          : PWM
+  MotorVR in2          : PWM
+  MotorVR enable       : PWM (usually digital)
+  MotorVL in1          : PWM
+  MotorVL in2          : PWM
+  MotorVL enable       : PWM  
 */
 
 #include <VirtualWire.h>
@@ -47,13 +48,9 @@ double HL(int X, int Y)
   
   double res=0;
   if (x+y>0)
-  {
     res=min(x+y,512);
-  }
   else
-  {
     res=max(x+y,-512);
-  }
   return res/512;
 }
 
@@ -66,13 +63,9 @@ double HR(int X, int Y)
   
   double res=0;
   if (y-x>0)
-  {
     res=min(y-x,512);
-  }
   else
-  {
     res=max(y-x,-512);
-  }
   return res/512;
 }
 
@@ -83,15 +76,8 @@ double HR(int X, int Y)
 // Inputs
 int pinJoyAX         = A14; // analog
 int pinJoyAY         = A13; // analog
-int pinJoyAZ         = A15;
+int pinJoyAZ         = A15; // analog
 int pinJoyBY         = A12; // analog
-//int pinWDA           = 51;
-//int pinWDB           = 50;
-//int pinTensMon       = 0; // analog
-
-// Outputs
-//int pinLEDPB         = 49;
-//int pinLEDPow        = 48;
 
 int pinMotHR1        = 2; // PWM
 int pinMotHR2        = 3; // PWM
@@ -107,33 +93,28 @@ int pinMotVL1        = 11; // PWM
 int pinMotVL2        = 12; // PWM
 int pinMotVLEn       = 13; // PWM
 
-int pinLightL1       = 23;
-int pinLightL2       = 25;
-int pinLightLEn      = 27;
-int pinLightR1       = 22;
-int pinLightR2       = 24;
-int pinLightREn      = 26;
-
-
+int pinLightL1       = 23; // digital
+int pinLightL2       = 25; // digital
+int pinLightLEn      = 27; // digital
+int pinLightR1       = 22; // digital
+int pinLightR2       = 24; // digital
+int pinLightREn      = 26; // digital
 
 // VARIABLES
 int valJoyAX         = 0;
 int valJoyAY         = 0;
 int valJoyAZ         = 0;
 int valJoyBY         = 0;
-//int valWDA           = 0;
-//int valWDB           = 0;
-//int valTensMon       = 0;
-int ledPBBlink       = 0;
-int ledPowBlink      = 0;
 double valHL         = 0;
 double valHR         = 0;
-int onboardLEDState  = 0;
-int lightState       = 0;
 int valJoyAZPrev     = 0;
 int calJoyAX         = 0;
 int calJoyAY         = 0;
 int calJoyBY         = 0;
+
+///////////
+// SETUP //
+///////////
 
 void setup()
 {
@@ -142,10 +123,6 @@ void setup()
   calJoyBY   = analogRead(pinJoyBY);
   
   pinMode(pinJoyAZ, INPUT_PULLUP);
-//  pinMode(pinWDA, INPUT);
-//  pinMode(pinWDB, INPUT);
-//  pinMode(pinLEDPB, OUTPUT);
-//  pinMode(pinLEDPow, OUTPUT);
   pinMode(pinLightL1, OUTPUT);
   pinMode(pinLightL2, OUTPUT);
   pinMode(pinLightLEn, OUTPUT);
@@ -157,22 +134,23 @@ void setup()
   Serial.println("Setup Remote Control");
 }
 
+//////////
+// LOOP //
+//////////
+
 void loop()
 {  
   /////////////////
   // READ INPUTS //
   /////////////////
   
-//  valJoyAX = map(analogRead(pinJoyAX),0,1023,-512,512);
   valJoyAX   = analogRead(pinJoyAX);
   valJoyAY   = analogRead(pinJoyAY);
   valJoyAZPrev = valJoyAZ;
   valJoyAZ   = digitalRead(pinJoyAZ);
   valJoyBY   = analogRead(pinJoyBY);
-//  valWDA     = digitalRead(pinWDA);
-//  valWDB     = digitalRead(pinWDB);
-//  valTensMon = analogRead(pinTensMon);
 
+/*
   ///////////
   // DEBUG //
   ///////////
@@ -187,8 +165,7 @@ void loop()
 
   Serial.print("Joystick B : "); 
   Serial.println(valJoyBY);
-
-
+*/
 
 
   ////////////
@@ -211,8 +188,6 @@ void loop()
   {
     if(valJoyAZ==0 && valJoyAZPrev==1 && lightState== 1)
     {  
-      //digitalWrite(pinLightL,LOW);
-      //digitalWrite(pinLightR,LOW);
       digitalWrite(pinLightL1,HIGH);
       digitalWrite(pinLightL2,LOW);
       analogWrite(pinLightLEn,0);
@@ -223,105 +198,16 @@ void loop()
       lightState = 0;
     }
   }
-/*    
-  /////////////////////
-  // WATER DETECTION // 
-  /////////////////////
-  
-  
-  if(valWDA >0 || valWDB > 0)
-  {
-    // Water detected : make the LEDPB blink
-    if(ledPBBlink < 0)
-    {
-      digitalWrite(pinLEDPB,LOW);
-      ledPBBlink++;
-    }
-    else
-    {
-      if(ledPBBlink < 100)
-      {
-        digitalWrite(pinLEDPB,HIGH);
-        ledPBBlink++;
-      }
-      else
-      {
-        ledPBBlink=-200;
-      }
-    }
-    
-  }
-  else
-  {
-    // No problem
-    digitalWrite(pinLEDPB,LOW);
-  }
-*/
-/*  
-  ///////////////////
-  // BATTERY STATE //
-  ///////////////////
-  
-  //   x  (+)---,
-  //   |       R1
-  // U |        |----pinTensReg x
-  //   |       R2               | Vout
-  //   |  (-)---'----Gnd        |
-  //
-  // Vout = R1/(R1+R2) . U
-  // U = 12 V
-  // R2 = 68 Ohms
-  // R1 = 47 Ohms
-  // Vout ~ 4.9 V < 5 V  
-  
-  if(valTensMon> 3.5)
-  {
-    // Correct tension
-    digitalWrite(pinLEDPow,HIGH);
-  }
-  else
-  {
-    // Low tension 
-    if(ledPowBlink<0)
-    {
-      digitalWrite(pinLEDPow,LOW);
-      ledPowBlink++;
-    } 
-    else
-    {
-      if(ledPowBlink<100)
-      {
-        digitalWrite(pinLEDPow,HIGH);
-        ledPowBlink++;
-      }
-      else
-      {
-        ledPowBlink=-200;
-      }
-    }
-  }
 
-*/
   ////////////
-  // MOTORS // OK
+  // MOTORS //
   ////////////
-  // (Check the directions)
   
   // Due to the direction of the joysticks on the remote control, the X is Y and the Y is X
   valHL = HL(valJoyAY-calJoyAY, valJoyAX-calJoyAX);
   valHR = HR(valJoyAY-calJoyAY, valJoyAX-calJoyAX);
   
-//  Serial.print("Values : X=");
-//  Serial.print(valJoyAY-calJoyAY);
-//  Serial.print(", Y=");
-//  Serial.println(valJoyAX-calJoyAX);
-//  Serial.print("Motors : valHL=");
-//  Serial.print(valHL);
-//  Serial.print(", valHR=");
-//  Serial.println(valHR);
-//  
-  
-  // Motor HL // OK
+  // Motor HL
   if(valHL>0)
   {
     analogWrite(pinMotHL1,255);
@@ -349,7 +235,7 @@ void loop()
     analogWrite(pinMotHREn,-255*valHR);
   }
   
-  // Motors VL and VR // OK
+  // Motors VL and VR
   if(valJoyBY > calJoyBY + 10)
   {
     analogWrite(pinMotVL1,255);
