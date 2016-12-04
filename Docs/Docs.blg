@@ -4,52 +4,54 @@ The top-level auxiliary file: Docs.aux
 The style file: plain.bst
 Database file #1: sources.bib
 Warning--to sort, need author or key in arduino
+Warning--to sort, need author or key in filsMM
 Warning--to sort, need author or key in joystick
+Warning--to sort, need author or key in dualHBridge
 Warning--to sort, need author or key in lampe
 Warning--to sort, need author or key in regulateurTension
 Warning--to sort, need author or key in pompe
 Warning--to sort, need author or key in helice
 Warning--to sort, need author or key in driveDog
 Warning--to sort, need author or key in adaptateurAxe
-You've used 8 entries,
+You've used 10 entries,
             2118 wiz_defined-function locations,
-            532 strings with 5339 characters,
-and the built_in function-call counts, 1364 in all, are:
-= -- 136
-> -- 8
+            542 strings with 5695 characters,
+and the built_in function-call counts, 1702 in all, are:
+= -- 170
+> -- 10
 < -- 0
-+ -- 8
++ -- 10
 - -- 0
-* -- 42
-:= -- 161
-add.period$ -- 24
-call.type$ -- 8
-change.case$ -- 24
+* -- 52
+:= -- 201
+add.period$ -- 30
+call.type$ -- 10
+change.case$ -- 30
 chr.to.int$ -- 0
-cite$ -- 16
-duplicate$ -- 56
-empty$ -- 185
+cite$ -- 20
+duplicate$ -- 70
+empty$ -- 231
 format.name$ -- 0
-if$ -- 337
+if$ -- 421
 int.to.chr$ -- 0
-int.to.str$ -- 8
+int.to.str$ -- 10
 missing$ -- 0
-newline$ -- 43
+newline$ -- 53
 num.names$ -- 0
-pop$ -- 80
+pop$ -- 100
 preamble$ -- 1
-purify$ -- 16
+purify$ -- 20
 quote$ -- 0
-skip$ -- 40
+skip$ -- 49
 stack$ -- 0
-substring$ -- 40
-swap$ -- 8
+substring$ -- 50
+swap$ -- 10
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 32
-warning$ -- 8
+type$ -- 40
+warning$ -- 10
 while$ -- 0
-width$ -- 9
-write$ -- 74
-(There were 8 warnings)
+width$ -- 12
+write$ -- 92
+(There were 10 warnings)

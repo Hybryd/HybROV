@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{adaptateurAxe}
 Adaptateur d'axe.
@@ -11,6 +11,12 @@ Adaptateur d'axe.
 \newblock
   \url{http://www.hobbyking.com/hobbyking/store/__12713__4mm_Drive_dog.html}.
 \newblock Prix : 1.62€.
+
+\bibitem{dualHBridge}
+Dual h bridge l298n.
+\newblock
+  \url{https://fr.aliexpress.com/item/L298N-Dual-H-Bridge-Stepper-Motor-Driver-Board-For-Arduino/32392774289.html}.
+\newblock Prix : 1.37€.
 
 \bibitem{helice}
 {Hélices}.
@@ -29,6 +35,12 @@ Lampe del 5w 12v dc.
 \newblock
   \url{https://fr.aliexpress.com/item/MR11-led-spotlight-4W-5W-7W-5730-SMD-Spotlight-AC-DC-12V-LED-Spot-Bulb-Light/32425374145.html}.
 \newblock Prix : $\approx$ 2€.
+
+\bibitem{filsMM}
+Lot de fils mâle/mâle.
+\newblock
+  \url{https://fr.aliexpress.com/item/Dupont-line-120-pins-lot-10cm-male-to-male-jumper-wire-Dupont-line-Dupont-cable-jumper/32685453704.html}.
+\newblock Prix : 0.99€.
 
 \bibitem{arduino}
 Mega2560 rev3 (atmega2560-16au) compatible arduino.

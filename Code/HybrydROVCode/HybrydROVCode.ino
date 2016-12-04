@@ -74,25 +74,30 @@ double HR(int X, int Y)
 //////////
 
 // Inputs
+
+// Joysticks
 int pinJoyAX         = A14; // analog
 int pinJoyAY         = A13; // analog
 int pinJoyAZ         = A15; // analog
 int pinJoyBY         = A12; // analog
 
+// Motors
+// Horizontal Right
 int pinMotHR1        = 2; // PWM
 int pinMotHR2        = 3; // PWM
 int pinMotHREn       = 4; // PWM
-int pinMotVR1        = 5; // PWM
-int pinMotVR2        = 6; // PWM
-int pinMotVREn       = 7; // PWM
 
-int pinMotHL1        = 8; // PWM
-int pinMotHL2        = 9; // PWM
-int pinMotHLEn       = 10; // PWM
-int pinMotVL1        = 11; // PWM
-int pinMotVL2        = 12; // PWM
-int pinMotVLEn       = 13; // PWM
+// Vertical (both)
+int pinMotV1        = 5; // PWM
+int pinMotV2        = 6; // PWM
+int pinMotVEn       = 7; // PWM
 
+// Horizontal Left
+int pinMotHL1        = 11; // PWM
+int pinMotHL2        = 12; // PWM
+int pinMotHLEn       = 13; // PWM
+
+// Lights
 int pinLightL1       = 23; // digital
 int pinLightL2       = 25; // digital
 int pinLightLEn      = 27; // digital
@@ -112,12 +117,15 @@ int calJoyAX         = 0;
 int calJoyAY         = 0;
 int calJoyBY         = 0;
 
+int lightState = 0;
+
 ///////////
 // SETUP //
 ///////////
 
 void setup()
 {
+  
   calJoyAX   = analogRead(pinJoyAX);
   calJoyAY   = analogRead(pinJoyAY);
   calJoyBY   = analogRead(pinJoyBY);
@@ -131,7 +139,6 @@ void setup()
   pinMode(pinLightREn, OUTPUT);
   
   Serial.begin(9600);
-  Serial.println("Setup Remote Control");
 }
 
 //////////
@@ -150,11 +157,11 @@ void loop()
   valJoyAZ   = digitalRead(pinJoyAZ);
   valJoyBY   = analogRead(pinJoyBY);
 
-/*
+
   ///////////
   // DEBUG //
   ///////////
-  
+  /*
   Serial.println("-------------");
   Serial.print("Joystick A : "); 
   Serial.print(valJoyAX);
@@ -171,7 +178,7 @@ void loop()
   ////////////
   // LIGHTS //
   ////////////
-  
+
   if(valJoyAZ==0 && valJoyAZPrev==1 && lightState==0)
   {
     digitalWrite(pinLightL1,HIGH);
@@ -202,10 +209,13 @@ void loop()
   ////////////
   // MOTORS //
   ////////////
+
+  // Manette inversee
   
-  // Due to the direction of the joysticks on the remote control, the X is Y and the Y is X
-  valHL = HL(valJoyAY-calJoyAY, valJoyAX-calJoyAX);
-  valHR = HR(valJoyAY-calJoyAY, valJoyAX-calJoyAX);
+  //valHL = HL(valJoyAY-calJoyAY, valJoyAX-calJoyAX);
+  //valHR = HR(valJoyAY-calJoyAY, valJoyAX-calJoyAX);
+  valHL = HL(calJoyAY-valJoyAY, calJoyAX-valJoyAX);
+  valHR = HR(calJoyAY-valJoyAY, calJoyAX-valJoyAX);
   
   // Motor HL
   if(valHL>0)
@@ -221,6 +231,8 @@ void loop()
     analogWrite(pinMotHLEn,-255*valHL);
   }
   
+ 
+
   // Motor HR
   if(valHR>0)
   {
@@ -236,39 +248,55 @@ void loop()
   }
   
   // Motors VL and VR
-  if(valJoyBY > calJoyBY + 10)
+
+  if(valJoyBY - calJoyBY > 10)
   {
-    analogWrite(pinMotVL1,255);
-    analogWrite(pinMotVL2,0);
-    analogWrite(pinMotVLEn,min((valJoyBY-calJoyBY)/2,255));
-    
-    analogWrite(pinMotVR1,0);
-    analogWrite(pinMotVR2,255);
-    analogWrite(pinMotVREn,min((valJoyBY-calJoyBY)/2,255));
+    analogWrite(pinMotV1,255);
+    analogWrite(pinMotV2,0);
+    analogWrite(pinMotVEn,min(valJoyBY-calJoyBY,255));
   }
   else
   {
-    if(valJoyBY< calJoyBY-10)
+    if(valJoyBY - calJoyBY < -10)
     {
-      analogWrite(pinMotVL1,0);
-      analogWrite(pinMotVL2,255);
-      analogWrite(pinMotVLEn,(calJoyBY-valJoyBY)/2);
-      
-      analogWrite(pinMotVR1,255);
-      analogWrite(pinMotVR2,0);
-      analogWrite(pinMotVREn,(calJoyBY-valJoyBY)/2);
+      analogWrite(pinMotV1,0);
+      analogWrite(pinMotV2,255);
+      analogWrite(pinMotVEn,min(calJoyBY-valJoyBY,255));
     }
     else // switch off the vertical motors
     {
-      analogWrite(pinMotVL1,0);
-      analogWrite(pinMotVL2,0);
-      analogWrite(pinMotVLEn,0);
-      
-      analogWrite(pinMotVR1,0);
-      analogWrite(pinMotVR2,0);
-      analogWrite(pinMotVREn, 0);
+      analogWrite(pinMotV1,0);
+      analogWrite(pinMotV2,0);
+      analogWrite(pinMotVEn,0);
     }
   }
+  
+  /*
+  if(valJoyBY < calJoyBY + 10)
+  {
+    analogWrite(pinMotV1,0);
+    analogWrite(pinMotV2,255);
+    //analogWrite(pinMotVEn,min((valJoyBY-calJoyBY)/2,255));
+    analogWrite(pinMotVEn,255);
+  }
+  else
+  {
+    if(valJoyBY + calJoyBY-10)
+    {
+      analogWrite(pinMotV1,255);
+      analogWrite(pinMotV2,0);
+      analogWrite(pinMotVEn,255);
+      //analogWrite(pinMotVEn,(calJoyBY-valJoyBY)/2);
+    }
+    else // switch off the vertical motors
+    {
+      
+      analogWrite(pinMotV1,0);
+      analogWrite(pinMotV2,0);
+      analogWrite(pinMotVEn,0);
+    }
+  }
+  */
   
   delay(200);
 }  

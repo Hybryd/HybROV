@@ -1,24 +1,25 @@
 \contentsline {section}{\numberline {1}Description}{2}{section.1}
-\contentsline {section}{\numberline {2}Remarques diverses}{2}{section.2}
+\contentsline {section}{\numberline {2}Remarques diverses}{3}{section.2}
 \contentsline {section}{\numberline {3}Pi\IeC {\`e}ces}{3}{section.3}
 \contentsline {subsection}{\numberline {3.1}Coque et support interne}{3}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}\IeC {\'E}lectronique et connectique}{3}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Propulsion}{3}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.2}\IeC {\'E}lectronique et connectique}{4}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Propulsion}{4}{subsection.3.3}
 \contentsline {subsection}{\numberline {3.4}Outils et consommables}{4}{subsection.3.4}
 \contentsline {section}{\numberline {4}Construction}{4}{section.4}
 \contentsline {subsection}{\numberline {4.1}Coque}{4}{subsection.4.1}
 \contentsline {subsubsection}{\numberline {4.1.1}Tube principal}{4}{subsubsection.4.1.1}
-\contentsline {subsection}{\numberline {4.2}Tubes sup\IeC {\'e}rieurs}{4}{subsection.4.2}
-\contentsline {subsubsection}{\numberline {4.2.1}Pieds}{5}{subsubsection.4.2.1}
-\contentsline {subsubsection}{\numberline {4.2.2}Phares et entr\IeC {\'e}e/sortie de la connectique}{6}{subsubsection.4.2.2}
-\contentsline {subsubsection}{\numberline {4.2.3}Support cam\IeC {\'e}ra (optionnel)}{6}{subsubsection.4.2.3}
-\contentsline {subsection}{\numberline {4.3}Moteurs et c\IeC {\^a}ble r\IeC {\'e}seau}{7}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}T\IeC {\'e}l\IeC {\'e}commande}{8}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}Ch\IeC {\^a}ssis interne}{8}{subsection.4.5}
-\contentsline {subsection}{\numberline {4.6}C\IeC {\^a}blage}{10}{subsection.4.6}
-\contentsline {subsubsection}{\numberline {4.6.1}Rallonge RJ45}{11}{subsubsection.4.6.1}
-\contentsline {subsubsection}{\numberline {4.6.2}Interfaces RJ45/Carte de pilotage et RJ45/T\IeC {\'e}l\IeC {\'e}commande}{11}{subsubsection.4.6.2}
-\contentsline {subsubsection}{\numberline {4.6.3}Connexions}{11}{subsubsection.4.6.3}
-\contentsline {section}{\numberline {5}Code arduino}{11}{section.5}
-\contentsline {section}{\numberline {6}Stabilisation}{12}{section.6}
-\contentsline {section}{\numberline {7}Id\IeC {\'e}es d'am\IeC {\'e}lioration}{12}{section.7}
+\contentsline {subsection}{\numberline {4.2}Tubes sup\IeC {\'e}rieurs}{5}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}Pieds}{6}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2}Phares et entr\IeC {\'e}e/sortie de la connectique}{7}{subsubsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.2.3}Support cam\IeC {\'e}ra (optionnel)}{8}{subsubsection.4.2.3}
+\contentsline {subsection}{\numberline {4.3}Moteurs et c\IeC {\^a}ble r\IeC {\'e}seau}{8}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}T\IeC {\'e}l\IeC {\'e}commande}{9}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Ch\IeC {\^a}ssis interne}{13}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}C\IeC {\^a}blage}{17}{subsection.4.6}
+\contentsline {subsubsection}{\numberline {4.6.1}Rallonge RJ45}{18}{subsubsection.4.6.1}
+\contentsline {subsubsection}{\numberline {4.6.2}Interfaces RJ45/Carte de pilotage et RJ45/T\IeC {\'e}l\IeC {\'e}commande}{18}{subsubsection.4.6.2}
+\contentsline {subsubsection}{\numberline {4.6.3}Connexions}{19}{subsubsection.4.6.3}
+\contentsline {section}{\numberline {5}Stabilisation}{19}{section.5}
+\contentsline {section}{\numberline {6}Code arduino}{20}{section.6}
+\contentsline {section}{\numberline {7}Id\IeC {\'e}es d'am\IeC {\'e}lioration}{20}{section.7}
+\contentsline {section}{Sources}{20}{Item.60}

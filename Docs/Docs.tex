@@ -18,6 +18,30 @@
 %\usepackage{amsfonts,amssymb,amsmath,amsthm,cite,mathtools,cases}
 \usepackage{graphicx}
 \usepackage{hyperref}
+
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={Guide de fabrication ROV},    % title
+%     pdfauthor={},     % author
+%     pdfsubject={},   % subject of the document
+%     pdfcreator={},   % creator of the document
+%     pdfproducer={Producer}, % producer of the document
+%     pdfkeywords={}, % list of keywords
+%     pdfnewwindow=true,      % links in new PDF window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=blue,          % color of internal links (change box color with linkbordercolor)
+%     linkbordercolor={1 0 0},
+    citecolor=magenta,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan,           % color of external 
+    bookmarksnumbered=true
+%      pdfdisplaydoctitle=true
+}
 \usepackage{xcolor}
 \usepackage{listings} % to include code
 \usepackage{etoolbox} 
@@ -119,8 +143,9 @@
 %%%%%%%%%%%%
 % DOCUMENT %
 %%%%%%%%%%%%
-
+\renewcommand{\contentsname}{Table des matières}
 \title{Guide de fabrication ROV}
+\date{Version 1.0}
 
 \begin{document}
   \maketitle
@@ -131,21 +156,41 @@
     \begin{figure}[H]
       \centering
       \includegraphics[scale=0.3]{ROVFinal.jpg}
+      \includegraphics[scale=0.3]{ROVOuvert.jpg}
       \caption{Aperçu global.}
     \end{figure}
-    \begin{figure}[H]
-      \centering
-      \includegraphics[scale=0.3]{ROVOuvert.jpg}
-      \caption{ROV ouvert.}
-    \end{figure}
+    
+    Voici un guide de fabrication d'un ROV (Remotely Operated Vehicle) étanche filoguidé ayant pour but d'embarquer une caméra sportive pour filmer les fonds marins. 
+    \begin{itemize}
+      \item \underline{Avantages} :
+            \begin{itemize}
+              \item Fabrication relativement simple
+              \item Coût assez faible
+              \item Compact
+              \item Programmable
+              \item Open-source
+            \end{itemize}
+      \item \underline{Inconvénients} : 
+            \begin{itemize}
+              \item Pas pratique pour le transport
+              \item Un peu lourd
+              \item Connectiques à améliorer
+            \end{itemize}
+    \end{itemize}
+
+    
     
 
   
   \section{Remarques diverses}
+    À lire avant de commencer :
+  
     \begin{itemize}
-      \item Les pièces citées ci-dessous correspondent à ce modèle de ROV précis. Elles ont été modifiées au fur et à mesure de la conception. Bien que la majeure partie des plans aient été dessinés avant la fabrication, des détails pratiques subsistent toujours. En règle générale, faire les plans \underline{en détail} à l'avance réduit les mauvaises surprises.
-    
-      \item Lorsque vous choisissez ou fabriquez vos pièces, veillez à ce que toutes dimensions soient compatibles. Par exemple, la batterie que j'ai choisie rentre tout juste dans la coque (des rainures ont même dû être faites pour la glisser à l'intérieur).
+      \item Le design du ROV, le choix des pièces, les techniques de fabrication et le code Arduino sont le fruit de lectures 
+
+      \item Les pièces citées ci-dessous correspondent à ce modèle de ROV précis. Elles ont été modifiées au fur et à mesure de la conception. Bien que la majeure partie des plans ait été dessinée avant la fabrication, on rencontre toujours des problèmes d'ordre pratiques. En règle générale, faire les plans \underline{en détail} à l'avance réduit les mauvaises surprises.
+
+      \item Lorsque vous choisissez ou fabriquez vos pièces, veillez à ce que toutes dimensions soient compatibles. Par exemple, la batterie que j'ai choisie rentre tout juste dans la coque (des rainures ont même dû être faites pour la glisser à l'intérieur). Lorsque vous choisissez votre batterie, calculez la longueur de la diagonale : elle doit être inférieure au diamètre \underline{interne} de votre tube principal.
       
       \item Les dimensions du ROV ne doivent être 
       \begin{itemize}
@@ -153,7 +198,8 @@
         \item \underline{ni trop petites} : un manque d'espace à l'intérieur du ROV réduit la marge de manoeuvre lors d'un problème pratique (oubli d'un composant, etc.). Prévoyez assez d'espace pour les fils.
       \end{itemize}
       
-    
+      \item Ce guide ne décrit pas toutes les techniques comme coller du PVC ou programmer sur Arduino.
+      
     \end{itemize}
 
   \section{Pièces}
@@ -194,8 +240,8 @@
                   \hline
                 \end{tabular}
               \end{center}
-        \item du plomb pour lester (plomb de 1/2 Kg pour la chasse sous-marine)
-        \item 2 baguettes en bois de 2m, dimensions 50mm x 50mm
+        \item du plomb pour lester (plomb de 1 à 2 Kg pour la chasse sous-marine)
+        \item 2 baguettes en bois de 2m, dimensions 5mm x 5mm
         \item 1 plaque de plexyglass épaisseur 3mm
       \end{itemize}
 
@@ -203,16 +249,18 @@
     \subsection{Électronique et connectique}
       \begin{itemize}
         \setlength\itemsep{-2mm}
-        \item 1 carte compatible Arduino Mega2560 REV3 \cite{arduino}
-        \item fils (mâle/mâle)
+        \item 1 carte Mega2560 REV3 compatible Arduino \cite{arduino}
+        \item fils mâle/mâle \cite{filsMM}
         \item 1 interrupteur
-        \item 2 connecteurs molex 4 broches (1 femelle et 1 mâle)
+        \item 1 paire de connecteurs molex 4 broches femelle/mâle
+        \item 8 dominos
         \item 2 joysticks analogiques (axes X/Y + boutton central) \cite{joystick}
-        \item 2 câbles cat6 RJ45 : 1 rouleau de 50m et un autre de longueur quelconque
+        \item 1 rouleau de câble cat6 RJ45 de 50m
+        \item 3 fiches RJ45 mâles
         \item 3 adaptateurs d'extension de câble cat6 RJ45 femelle/femelle
-        \item 3 dual H-bridge %(30g Taille: 43 * 43 * 27mm)
+        \item 3 dual H-bridge L298N \cite{dualHBridge} %(30g Taille: 43 * 43 * 27mm)
         \item 2 spots blancs DEL 5W 12V DC (310-320 lumens) \cite{lampe}
-        \item 1 batterie rechargeable 12V 12 A.h de dimensions 151mm x 98mm x 95mm
+        \item 1 batterie rechargeable 12V 12 A.h de dimensions 151mm x 98mm x 95mm %\footnote{Les dimensions de la batterie définissent le diamètre minimal du tube principal.}
         \item 1 module de régulation de tension LM2596 DC 1.3--37V \cite{regulateurTension}%Converter Module LM2596 DC 4.0 ~ 40 à 1.3-37 V Tension Réglable régulateur
       \end{itemize}
 
@@ -242,7 +290,7 @@
         \item 1 pot de colle PVC (500 mL)
         \item 2 tubes de colle époxy
         \item boulons et écrous diamètre 3mm
-        \item 1 gant de cuisine ou en latex (pour la télécommande)
+        \item 1 gant de cuisine ou en latex
       \end{itemize}
 
 
@@ -281,8 +329,13 @@
           
           \begin{figure}[H]
             \centering
-            \includegraphics[scale=0.3]{ROVTubeSuperieur.jpg}
-            \includegraphics[scale=0.24]{ROVTubeSuperieurArriere.jpg}
+%             \includegraphics[scale=0.3]{ROVTubeSuperieur.jpg}
+%             \includegraphics[scale=0.24]{ROVTubeSuperieurArriere.jpg}
+            \includegraphics[scale=0.35]{ROVTubeSuperieur.jpg}
+          \end{figure}
+          \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.4]{ROVTubeSuperieurArriere.jpg}
             \caption{Tube supérieur.}
           \end{figure}
           
@@ -293,10 +346,15 @@
             \item Vérifiez que la coque est droite en la posant sur une surface plate.
         \end{enumerate}
         
-        \begin{figure}[H]
+          \begin{figure}[H]
             \centering
-            \includegraphics[scale=0.245]{ROVPiedCote.jpg}
-            \includegraphics[scale=0.2]{ROVPiedHaut.jpg}
+%             \includegraphics[scale=0.245]{ROVPiedCote.jpg}
+%             \includegraphics[scale=0.2]{ROVPiedHaut.jpg}
+            \includegraphics[scale=0.4]{ROVPiedCote.jpg}
+          \end{figure}  
+          \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.4]{ROVPiedHaut.jpg}
             \caption{Pied.}
           \end{figure}
         
@@ -311,7 +369,7 @@
           
           \begin{figure}[H]
             \centering
-            \includegraphics[scale=0.24]{ROVTubeSuperieurFace.jpg}
+            \includegraphics[scale=0.4]{ROVTubeSuperieurFace.jpg}
             \caption{Tube supérieur avec phare.}
           \end{figure}
           
@@ -354,8 +412,8 @@
           \includegraphics[scale=0.27]{ROVGauche.jpg}
           \includegraphics[scale=0.26]{ROVHaut.jpg}
           \includegraphics[scale=0.24]{ROVFace.jpg}
-          \caption{Châssis interne.}
-          \label{figChassis}
+          \caption{Aperçu de la coque avec moteurs.}
+          \label{figApercu}
         \end{figure}
 
       \subsection{Télécommande}
@@ -366,15 +424,16 @@
           
           \item Découpez deux tubes de diamètre 40mm et de longueur 30mm.
           
-          \item Percez la télécommande pour faire passer ces tubes en deux endroits distants de 6cm à 9cm (selon vos préférences).
+          \item Percez la télécommande pour faire passer ces tubes en deux endroits distants de 6cm à 9cm, selon vos préférences.
           
-          \item Collez les tubes à la télécommande de façon à ne rien laisser dépasser à l'intérieur. Au pire, vous réduirez la longueur des tubes par la suite.
+          \item Collez les tubes à la télécommande de façon à ne rien laisser dépasser à l'intérieur. Au pire, vous réduirez la longueur des tubes par la suite (Figure \ref{figPlansTelecommande}).
+          
           \item Découpez deux extrémités de doigt de gant de cuisine, retournez-les et placez sur les tubes perpendiculaires à la manette.
           
           \item Fixez les deux joysticks sur une baguette de 5mm x 5mm de longueur 13cm, en les séparant du même écart que celui choisi pour les tubes perpendiculaires à la manette. \\
           J'ai choisi d'orienter les broches vers le centre de la télécommande pour rassembler les fils.
           
-          \item Connectez les fils aux joysticks et soudez-les aux broches d'un adaptateur femelle/femelle RJ45.% \footnote{voir la partie Câblage}
+          \item Connectez les fils aux joysticks et soudez-les aux broches d'un adaptateur femelle/femelle RJ45.
           
           \item Glissez le tout dans la télécommande et immobilisez-le si besoin. Testez l'accès aux joysticks au travers des tubes perpendiculaires. Pour ma télécommande, j'ai enlevé les coques arrondies des joysticks.
           
@@ -384,11 +443,28 @@
           
           \item Branchez le câble à l'adaptateur RJ45 de la télécommande.
           
-          \item Notez la longueur de câble nécéssaire pour faire rentrer correctement les joysticks, les fils et l'adaptateur à l'intérieur de la télécommande. Puis remplissez le tube 20mm avec de la colle époxy pour figer le câble RJ45.
+          \item Notez la longueur de câble nécéssaire pour faire rentrer correctement les joysticks, les fils et l'adaptateur à l'intérieur de la télécommande. Puis remplissez le tube 20mm avec de la colle époxy pour figer le câble RJ45 (Figure \ref{figTelecommande}).
           
-          \item Votre télécommande est prête!
+%           \item Votre télécommande est prête!
         \end{enumerate}
-
+        
+        \begin{figure}[H]
+          \centering
+          \includegraphics[scale=0.44]{ROVTelecommandeGlobal.jpg}
+          \includegraphics[scale=0.44]{ROVTelecommandeGlobal2.jpg}
+          \caption{Plans de la télécommande.}
+          \label{figPlansTelecommande}
+        \end{figure}
+        
+        \begin{figure}[H]
+          \centering
+          \includegraphics[scale=0.15]{ROVReelTelecommande.jpg}
+          \includegraphics[scale=0.15]{ROVReelTelecommandeJoysticks.jpg}
+          \includegraphics[scale=0.15]{ROVReelTelecommandeTube.jpg}
+          \caption{Télécommande.}
+          \label{figTelecommande}
+        \end{figure}
+        
       
       \subsection{Châssis interne}
         Longueur 127mm, Largeur : 116mm, Hauteur : 90mm.
@@ -397,29 +473,76 @@
 
           \item Calez la batterie avec du carton si besoin.
           
-          \item Fixez les composants électroniques avec des vis 3mm et colliers de serrage (Figure \ref{figChassisComposants})..
+          \item Réalisez des encoches dans la structure en bois pour faire passer la carte de pilotage.
           
-          \item Ajoutez une rangée de 8 dominos sur la face arrière du chassis.
+          \item Fixez les composants électroniques avec des vis 3mm et colliers de serrage (Figures \ref{figChassisComposants} et \ref{figROVReelInterieurSansBatterie}).
+          
+          \item Ajoutez une rangée de 8 dominos sur la face arrière du chassis (Figure \ref{figDominos}).
         \end{enumerate}
         
         \begin{figure}[H]
           \centering
-          \includegraphics[scale=0.24]{ROVChassisGlobal.jpg}
-          \includegraphics[scale=0.24]{ROVChassisFace.jpg}
-          \includegraphics[scale=0.24]{ROVChassisGauche.jpg}
-          \caption{Châssis interne.}
+          \includegraphics[scale=0.25]{ROVChassisGlobal.jpg}
+          \includegraphics[scale=0.25]{ROVChassisFace.jpg}
+          \includegraphics[scale=0.25]{ROVChassisGauche.jpg}
+          \caption{Plans du châssis interne.}
           \label{figChassis}
         \end{figure}
         \begin{figure}[H]
           \centering
-          \includegraphics[scale=0.25]{ROVInterieurVueGlobale.jpg}
-          \includegraphics[scale=0.25]{ROVInterieurFace.jpg}
-          \includegraphics[scale=0.22]{ROVInterieurGauche.jpg}
-          \includegraphics[scale=0.22]{ROVInterieurHaut.jpg}
-          
+          \includegraphics[scale=0.15]{ROVReelDominos.jpg}
+          \caption{Dominos à l'arrière du châssis.}
+          \label{figDominos}
+        \end{figure}
+        
+        \begin{figure}[H]
+          \centering
+          \includegraphics[scale=0.4]{ROVInterieurVueGlobale.jpg}
+          \includegraphics[scale=0.4]{ROVInterieurGauche.jpg}
+          \includegraphics[scale=0.4]{ROVInterieurFace.jpg}
+        \end{figure}
+        \begin{figure}[H]
+          \centering
+          \includegraphics[scale=0.4]{ROVInterieurHaut.jpg}
           \caption{Châssis interne avec les composants.}
           \label{figChassisComposants}
         \end{figure}
+        \begin{figure}[H]
+          \centering
+          \includegraphics[scale=0.15]{ROVReelInterieurSansBatterie.jpg}
+          \caption{Châssis interne après câblage.}
+          \label{figROVReelInterieurSansBatterie}
+        \end{figure}
+
+        \begin{figure}[H]
+          \centering
+          \includegraphics[scale=0.15]{ROVReelChassisArriere.jpg}
+          \caption{Vue de l'avant du châssis.}
+          \label{figChassisAvant}
+        \end{figure}
+        \begin{remarque*}
+          Sur la Figure \ref{figChassisAvant}, on peut apercevoir le convertisseur 12V/5V fixé en bas à gauche, depuis lequel sortent un fil noir (masse) et un fil jaune (12V).
+        \end{remarque*}
+
+
+%         \begin{figure}[H]
+%           \centering
+%           \includegraphics[scale=0.24]{ROVChassisGlobal.jpg}
+%           \includegraphics[scale=0.24]{ROVChassisFace.jpg}
+%           \includegraphics[scale=0.24]{ROVChassisGauche.jpg}
+%           \caption{Châssis interne.}
+%           \label{figChassis}
+%         \end{figure}
+%         \begin{figure}[H]
+%           \centering
+%           \includegraphics[scale=0.25]{ROVInterieurVueGlobale.jpg}
+%           \includegraphics[scale=0.25]{ROVInterieurFace.jpg}
+%           \includegraphics[scale=0.22]{ROVInterieurGauche.jpg}
+%           \includegraphics[scale=0.22]{ROVInterieurHaut.jpg}
+%           
+%           \caption{Châssis interne avec les composants.}
+%           \label{figChassisComposants}
+%         \end{figure}
 
       
       \subsection{Câblage}
@@ -428,7 +551,8 @@
           \begin{remarque*}
             L'ensemble de mes fils étant scotchés entre eux (et par manque de rigueur au niveau de leur étiquetage), il m'a été difficile d'identifier certaines connexions. Cela ne concerne qu'une éventuelle inversion des pôles positifs et négatifs des moteurs. Il se peut donc que certaines connexions $\pm$ concernant les moteurs soient inversées. Cela a pour conséquence une rotation inverse de ces derniers. \\
             Dans tous les cas, je conseille de prendre ce schéma à titre d'exemple et de vérifier votre branchement en testant une à une chaque entrée/sortie de la carte de pilotage (en affichant les valeurs sur le port série par exemple).\\
-            \textbf{Étiquetez les fils, cela vous épargnera de longues minutes à retrouver les bons branchement...}
+            \textbf{Étiquetez les fils, cela vous épargnera de longues minutes à retrouver les bons branchement...}\\
+            De plus, pensez à relier toutes les masses, notamment celle de la batterie et le GND de la carte de pilotage.
           \end{remarque*}
 
           \begin{figure}[H]
@@ -466,17 +590,7 @@
         \subsubsection{Connexions}
           
       
-      \section{Code arduino}
-        Le code est disponible sur GitHub \url{XXXXX}. Bien que le code soit assez simple à comprendre, voici quelques explications concernant la liaison entre les joysticks et les moteurs :
-        \begin{itemize}
-          \item Fonctions \emph{double HL} et \emph{double HR}:
-            \begin{itemize}
-%               \item Rôle : reçoit les signaux des joysticks correspondants (joystick A pour le mouvement dans le plan horizontal, joystick B pour le mouvement vertical) et retourne un nombre entre -1 et 1 indiquant 
-              \item Entrées \emph{(int X, int Y)} : valeurs comprises entre 0 et 1024 correspondant aux signaux X Y de sortie du joystick (A : pour le mouvement dans le plan horizontal, B : pour le mouvement vertical).
-              \item Sortie  \emph{double res} : valeur comprise entre -1 et 1 indiquant la direction (positif : vers l'avant/haut, négatif : vers l'arrière/bas) ainsi que la vitesse (0 : aucune, 1 : maximale) du mouvement.
-            \end{itemize}
-            \item Partie \emph{// MOTORS //} dans la fonction principale \emph{void loop()}:\\ \emph{valHL} et \emph{valHR} récupèrent le nombre fourni par les fonctions \emph{HL} et \emph{HR}, compris entre -1 et 1. En fonction du signe de ces valeurs, le ROV avance ou recule, la vitesse étant contrôlée par la valeur absolue de ce nombre. Il en va de même pour les moteurs verticaux.
-        \end{itemize}
+      
 
     \section{Stabilisation}
       
@@ -499,7 +613,17 @@
       \end{enumerate}
 
       
-
+    \section{Code arduino}
+        Le code est disponible sur GitHub \url{XXXXX}. Bien que le code soit assez simple à comprendre, voici quelques explications concernant la liaison entre les joysticks et les moteurs :
+        \begin{itemize}
+          \item Fonctions \emph{double HL} et \emph{double HR}:
+            \begin{itemize}
+%               \item Rôle : reçoit les signaux des joysticks correspondants (joystick A pour le mouvement dans le plan horizontal, joystick B pour le mouvement vertical) et retourne un nombre entre -1 et 1 indiquant 
+              \item Entrées \emph{(int X, int Y)} : valeurs comprises entre 0 et 1024 correspondant aux signaux X Y de sortie du joystick (A : pour le mouvement dans le plan horizontal, B : pour le mouvement vertical).
+              \item Sortie  \emph{double res} : valeur comprise entre -1 et 1 indiquant la direction (positif : vers l'avant/haut, négatif : vers l'arrière/bas) ainsi que la vitesse (0 : aucune, 1 : maximale) du mouvement.
+            \end{itemize}
+            \item Partie \emph{// MOTORS //} dans la fonction principale \emph{void loop()}:\\ \emph{valHL} et \emph{valHR} récupèrent le nombre fourni par les fonctions \emph{HL} et \emph{HR}, compris entre -1 et 1. En fonction du signe de ces valeurs, le ROV avance ou recule, la vitesse étant contrôlée par la valeur absolue de ce nombre. Il en va de même pour les moteurs verticaux.
+        \end{itemize}
     
     \section{Idées d'amélioration}
       \begin{enumerate}
@@ -509,220 +633,8 @@
       \end{enumerate}
 
 
-%         \begin{lstlisting}[style=Arduino]
-% #include <VirtualWire.h>
-% 
-% double HL(int X, int Y)
-% {
-%   double res = 0;
-%   int x = max(X,-511);
-%   x = min(x,511);
-%   int y = max(Y,-511);
-%   y = min(y,511);
-%   if (x+y>0)
-%     res = min(x+y,512);
-%   else
-%     res = max(x+y,-512);
-%   return res/512;
-% }
-% 
-% double HR(int X, int Y)
-% {
-%   double res = 0;
-%   int x = max(X,-511);
-%   x = min(x,511);
-%   int y = max(Y,-511);
-%   y = min(y,511);
-%   if (y-x>0)
-%     res = min(y-x,512);
-%   else
-%     res = max(y-x,-512);
-%   return res/512;
-% }
-% \end{lstlisting}
-%   
-%    \begin{lstlisting}[style=Arduino]
-%     zadoakzd
-%    \end{lstlisting}
-
-    
-%   
-%   \section{Drone subaquatique avec caméra}
-%     Liens:
-%     \begin{itemize}
-%       \item \href{http://www.instructables.com/id/Underwater-ROV/?ALLSTEPS}{Instructable}
-%       \item \href{http://www.homebuiltrovs.com}{Homebuiltrovs}
-%       \item \href{http://www.interspec.org/}{Interspec}
-%       \item \href{http://www.rc-submarines.net/}{rc-submarines}
-%       \item \href{http://www.mcmaster.com}{matériaux}
-%       \item \href{http://www.diyrov.net/}{diyrov}
-%       \item \href{http://stephane.lavirotte.com/perso/rov/esc_brushless_raspberry.html}{lien}: TUTO lier moteurs, esc et RPI
-%       \item \href{http://explobotique.org/site/}{explobotique}
-%       \item \href{http://uzzors2k.4hv.org/?page=rovnokken}{ROVNokken}
-%     \end{itemize}
-%     
-%     \subsection{Pièces}
-%     
-%       \subsubsection{Propulsion}
-% %         {\bf Solution 1}\\
-% %         Source \url{http://www.homebuiltrovs.com/rovforum/viewtopic.php?f=3&t=1190} : 
-% %         \begin{itemize}
-% %           \item \href{http://hobbyking.com/hobbyking/store/__16229__NTM_Prop_Drive_Series_28_30A_750kv_140w.html}{DC motor} brushless :\\ 
-% %           
-% %             \begin{tabular}{ll}
-% %               Model & NTM Prop Drive Series 28-30A 750kv\\
-% %               Kv & 750rpm/v\\
-% %               Max current & 20A\\
-% %               Max Power &  120W @ 12v (3S) / 140W @ 15v (4S)\\
-% %               Shaft & 3mm \\
-% %               Weight & 67.1g\\
-% %               ESC & 25A\\
-% %               Cell count & 3s~4s Lipoly\\
-% %               Bolt holes & 16mm \& 19mm\\
-% %               Bolt thread&  M3\\
-% %               Connection & 3.5mm Bullet-connector\\
-% % %               Suggested Prop & Prop test data coming soon!
-% % %               Prix: $4\times13.49= 53.96$ €
-% %               Price & {\color{red} 13.49 €}
-% %             \end{tabular}\\
-% %           
-% %           \item \href{http://hobbyking.com/hobbyking/store/__15205__Hobby_King_30A_ESC_3A_UBEC.html}{ESC}:\\
-% %           \begin{tabular}{ll}
-% %             Constant Current&  30A\\
-% %             Burst Current & 40A\\
-% %             Battery & 2-4S Lipoly / 5-12s NiXX\\
-% %             BEC & 5v / 3A\\
-% %             Motor Type & Sensorless Brushless\\
-% %             Size & 54 x 26 11mm\\
-% %             Weight & 32g \\
-% %             Price & {\color{red} 8.99 €}
-% %           \end{tabular}\\
-% %           Programming Functions:\\
-% %           \begin{tabular}{ll}
-% %             Battery Type & Lipo /NiXX\\
-% %             Brake & On / Off \\
-% %             Voltage Protection & Low / Mid / High\\
-% %             Protection mode & Reduce power / Cut off power \\
-% %             Timing & Auto / High / Low\\
-% %             Startup & Fast / Normal / Soft\\
-% %             PWM Frequency & 8k / 16k \\
-% %             Helicopter mode & Off / 5sec / 15sec (Start up delay)\\
-% %           \end{tabular}
-% % 
-% %           
-% %           \item \href{http://hobbyking.com/hobbyking/store/__7356__Turnigy_4mm_AquaProp_43x26x9mm_.html}{Propeller} :\\
-% % 
-% %           \begin{tabular}{ll}
-% %             Model & Turnigy 4mm AquaProp\\
-% %             Size & 43x26x9mm \\
-% %             Length &   43mm\\
-% %             Pitch &  26\\
-% %             Diameter & 9mm \\
-% %             Shaft Size & 4mm\\
-% %             Price & {\color{red} 1.31 €}
-% %           \end{tabular}
-% %           
-% % 
-% %           \item \href{http://hobbyking.com/hobbyking/store/__12716__5mm_Drive_dog.html}{Dog drive}. Price {\color{red} $1.58$} €.
-% % 
-% %           \item \href{http://hobbyking.com/hobbyking/store/__16719__NTM_Prop_Drive_28_Series_Accessory_Pack.html}{Fixations}. Price {\color{red} $1.70$} €
-% % 
-% %         \end{itemize}
-% %         
-% %         Sous-total : $4\times 27.07 =$ {\color{red}$108.28$ €}
-% %         
-% %         
-% %         {\bf Solution 2}\\
-%         
-%         \begin{itemize}
-%           \item 4 \href{http://www.aliexpress.com/item/1100GPH-High-Flow-Submersible-Marine-Boat-Electric-Bilge-Pump-12V-3A-FREE-SHIPPING-DHL-EMS-gib/32302138453.html}{Pompes}. \PAYE\\
-%                     \begin{tabular}{ll}
-%                       Voltage & 12V \\
-%                       Current & 3 Amp \\
-%                       Flow rate & 1100GPH \\
-%                       Height & Approx. 10.5cm\\
-%                       Diameter & Approx. 5.5cm\\
-%                       Weight & $\sim$ 300g? \\
-%                       Price & {\color{red}13.21 €}
-%                     \end{tabular}
-%           
-%           \item 4 \href{http://hobbyking.com/hobbyking/store/__12716__5mm_Drive_dog.html}{Dog dive}. Price {\color{red} $1.58$} €.
-%           
-%           \item 2 Dual H-bridge (30g Taille: 43 * 43 * 27mm) \PAYE \RECU
-%           
-%         \end{itemize}
-%         Sous total {\color{red}$59.14$ €} 
-% 
-%         
-% 
-%         
-%         
-%       \subsubsection{Lumière \PAYE}
-%         Référénce: une petite torche sous marine fait 300-600 lumens. 
-%         \begin{itemize}
-%           \item 2 \href{http://www.miniinthebox.com/fr/mr11-4-5w-15x5730smd-310-320lm-2800-3000k-chaud-ampoule-led-a-lumiere-blanche-spot-12-24v_p960936.html?pos=ultimately_buy_6}{ampoules} à DEL (Mass=?, 35 x 35 x 35 mm) à 4.5 W: $2\times 310 = 620$ lumens. Prix $2\times 2 =$ {\color{red}$4$ €}.
-%           \item 1 Dual H-bridge (30g Taille: 43 * 43 * 27mm) \PAYE \RECU
-%         \end{itemize}
-% 
-%         
-%         
-%         
-%         
-%       \subsubsection{Structure}
-%       
-%         \href{http://www.sitakiki.fr/modnaval/tuby.htm}{Lien}
-%         \href{http://explobotique.free.fr/vidi1/vidi1_detail3.htm}{vidi}
-%         \href{http://explobotique.free.fr/ptipi/realisation_hublot.htm}{hublot}
-%         \begin{itemize}
-%           \item 1 \href{http://www.pointp.fr/gros-oeuvre-vrd-tp/tube-pvc-sotrabat-nf-me-gris-diametre-140mm-longueur-4m-eu-ep-A3890917p213S2R2m23}{tube} PVC 1000x140mm. Prix: {\color{red}7.98 €}
-%           \item 2 tubes 
-%         \end{itemize}
-% 
-%       
-%       \subsubsection{Télécommande  \PAYE}
-%         Télécommande reliée par fils, submersible, composée de 2 joysticks : 1 pour le plan horizontal, 1 pour l'axe vertical. Éventuellement un contrôle on/off global et un autre pour l'éclairage.\\
-%         \begin{itemize}
-%           \item 2 \href{http://www.ebay.co.uk/itm/Analogue-Joystick-Controller-5V-With-Click-Button-Arduino-PI-Compatible-/191608236635?}{Joysticks} Prix : {\color{red} 4.20 €} \PAYE
-%           \item câble ethernet \RECU
-%         \end{itemize}
-% 
-% 
-%         BONUS: Activation de la prise de photo/vidéo par servos. 2 \href{http://www.miniinthebox.com/fr/mini-servo-9g-avec-accessoires-bleu-translucide_p638990.html?litb_from=sysmail}{servos} et leurs fixations. Prix $2\times 2.59=$ {\color{red}$5.18$ €} \PAYE.
-%       
-%       \subsubsection{Électronique  \PAYE}
-%         \begin{itemize}
-%           \item \href{http://www.amazon.fr/LM2596-Abaisseur-Régulateur-Tension-Ajustable/dp/B00GSY3UBS/ref=pd_cp_147_1?ie=UTF8&refRID=19H2WCT90TTWCF32P1HK}{Régulateur} tension (Mass=?, 48 x 23 x 14 mm). Prix : {\color{red} 1.80 €}.
-%           \item \href{http://www.miniinthebox.com/fr/mega-2560-conseil-du-developpement-r3-conseil-atmega2560-16au-pour-arduino_p903300.html}{Arduino Mega 2560 R3}. \\
-%           \begin{tabular}{ll}
-%             
-%           
-%             Length & 101.98mm \\
-%             Width & 53.63mm \\
-%             Height & 15.29mm \\
-%             Weight & 34.9g\\
-%             Price: {\color{red}$9.99$ €}.
-%           \end{tabular}
-%           
-%           
-%           
-%           \item 2 \href{http://www.ebay.fr/itm/2-modules-detection-pluie-eau-Water-Sensor-pour-Arduino-envoi-de-France-E137-/201370405351?pt=LH_DefaultDomain_71&hash=item2ee29c89e7}{Capteurs} niveau d'eau (4.7g, 20 x 40 mm). Prix {\color{red} 3,69 €} \PAYE.
-%         \end{itemize}
-%         Test du cable ethernet : 5m OK.
-% 
-%         
-%       
-%       \subsubsection{Batterie \PAYE}
-%         12V, plus de 3 Ah
-%         \begin{itemize}
-%           \item \href{http://www.amazon.fr/gp/product/B001CNZP6S?psc=1&redirect=true&ref_=od_aui_detailpages00}{Chargeur} 3, 6, 12V,  3,4 KG. Prix: {\color{red} 16,25 €}.
-%           \item \href{http://www.amazon.fr/Batterie-plomb-AGM-12V-12Ah-12Ah/dp/B008FZ0WEG}{Batterie} plomb étanche AGM, $151 \times 98 \times 95$ mm, 12V 12Ah. Prix: {\color{red} 18,90 €}.
-%         \end{itemize}
-%         %\underline{ATTENTION}: dégage de l'hydrogène: isoler du reste des composants électroniques!
-%         
-%     \subsection{Calcul volume total d'air requis}
-%       Il s'agit d'avoir une idée de la taille globale du ROV. On le modélise par un cylindre en PVC fermé avec deux bouchons en PVC.
-%       Masse des composants (g):\\
-
+  \renewcommand\refname{Sources}
+  \addcontentsline{toc}{section}{Sources}
   \bibliographystyle{plain}
   \bibliography{sources}
       
